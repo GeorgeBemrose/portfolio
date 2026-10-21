@@ -65,7 +65,14 @@ const works: { id: string; title: string; meta: string; href?: string; text: str
   },
 ];
 
-const tools = ["TypeScript", "React", "Next.js", "Python", "Java", "PostgreSQL", "Kafka", "AWS", "Docker"];
+const tools: [string, string[]][] = [
+  ["Languages", ["TypeScript", "Python", "Java"]],
+  ["Front end", ["React", "Next.js"]],
+  ["AI", ["LLMs (Claude)", "Vector databases"]],
+  ["Data", ["PostgreSQL", "DynamoDB", "Redis", "Kafka", "Celery"]],
+  ["Infrastructure", ["AWS", "Terraform", "Docker", "Datadog"]],
+  ["Integrations", ["Xero API", "QuickBooks API"]],
+];
 
 export default function Home() {
   return (
@@ -170,7 +177,14 @@ export default function Home() {
         <section className="tools" aria-labelledby="tools-h">
           <div className="wrap">
             <h2 id="tools-h">Tools I use</h2>
-            <ul>{tools.map((t) => <li key={t}>{t}</li>)}</ul>
+            <dl>
+              {tools.map(([group, items]) => (
+                <div key={group}>
+                  <dt>{group}</dt>
+                  <dd>{items.join(", ")}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
       </main>
