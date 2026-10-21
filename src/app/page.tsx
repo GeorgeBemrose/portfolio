@@ -1,105 +1,207 @@
+import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { ThemeToggle, CopyEmail } from "./components/HomeControls";
+import "./home.css";
 
-import workExperience from "./data/work_experience.json";
-import education from "./data/education.json";
-import projects from "./data/projects.json";
+const EMAIL = "georgebemrose@gmail.com";
 
-const contacts = [
-  { name: "Email", href: "mailto:georgebemrose@gmail.com" },
-  { name: "GitHub", href: "https://github.com/GeorgeBemrose" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/georgebemrose/" },
-];
-
-const tools = ["TypeScript", "React", "Next.js", "Python", "Java", "PostgreSQL", "Kafka", "AWS", "Docker", "Git", "Linux"];
-
-type Entry = { start: string; end: string; organization: string; role: string; description?: string };
-
-function Ledger({ title, entries }: { title: string; entries: Entry[] }) {
+// Extraction box drawn around a fact after the hero scan passes; i staggers the timing.
+function Box({ field, i, children }: { field: string; i: number; children: ReactNode }) {
   return (
-    <section className="mt-16">
-      <h2 className="font-condensed text-2xl font-semibold">{title}</h2>
-      <ol className="mt-4 border-t-2 border-ink">
-        {entries.map((e) => (
-          <li
-            key={`${e.role}-${e.start}`}
-            className="grid gap-x-8 gap-y-1 border-b border-rule py-4 sm:grid-cols-[10rem_1fr]"
-          >
-            <p className="text-sm tabular-nums text-muted sm:pt-0.5">
-              {e.start} – {e.end}
-            </p>
-            <div>
-              <p className="font-medium">
-                {e.role}
-                {e.organization && <span className="font-normal text-muted">, {e.organization}</span>}
-              </p>
-              {e.description && <p className="mt-1 max-w-prose text-sm leading-relaxed text-muted">{e.description}</p>}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <span className="box" data-field={field} style={{ "--i": i } as CSSProperties}>
+      {children}
+    </span>
   );
 }
 
+const works: { id: string; title: string; meta: string; href?: string; text: string; tags: string[]; visual: ReactNode }[] = [
+  {
+    id: "w1",
+    title: "Artifact AI",
+    meta: "Founding Engineer, 2025 to now",
+    text: "AI drafts the bookkeeping; I build how accountants review it, approve it and post it back to their ledger, plus the integrations and data layer underneath.",
+    tags: ["Review workflows", "Ledger integrations", "Data platform"],
+    visual: (
+      <div className="queue">
+        <div><b>Bill: Northwind Paper</b><i>£412.80</i><span className="pill ok">Posted</span></div>
+        <div><b>Receipt: Taxi</b><i>£23.50</i><span className="pill warn">Review</span></div>
+        <div><b>Bank line: Stripe payout</b><i>£1,980.00</i><span className="pill ok">Matched</span></div>
+      </div>
+    ),
+  },
+  {
+    id: "w2",
+    title: "CGI",
+    meta: "Software Engineer, 2024 to 2025",
+    text: "Full-stack work on Java services and React front ends, with Kafka event streams, Elasticsearch, WebSockets and PostgreSQL on AWS.",
+    tags: ["Java", "React", "Kafka", "AWS", "Docker"],
+    visual: (
+      <div className="flow"><span>REST API</span><hr /><span className="hot">Kafka</span><hr /><span>Elasticsearch</span></div>
+    ),
+  },
+  {
+    id: "w3",
+    title: "Reg Lookup",
+    meta: "reglookup.info",
+    href: "https://reglookup.info",
+    text: "Type a UK registration and see the car's full MOT history from the DVLA API, with mileage charted across every test.",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    visual: (
+      <div className="plate-wrap">
+        <div className="plate">AB12 CDE</div>
+        <svg viewBox="0 0 176 48" role="presentation">
+          <line x1="0" y1="47" x2="176" y2="47" />
+          <polyline points="4,44 30,38 56,31 82,25 108,19 134,15 160,10 172,8" />
+          <circle cx="172" cy="8" r="3.5" />
+        </svg>
+      </div>
+    ),
+  },
+  {
+    id: "w4",
+    title: "Sudoku",
+    meta: "Play it here",
+    href: "/sudoku",
+    text: "A playable Sudoku with a pausable timer, a number pad and a check when you submit the grid.",
+    tags: ["React", "Next.js", "TypeScript"],
+    visual: (
+      <div className="sudoku">
+        <span className="given">4</span><span></span><span className="given">9</span>
+        <span>7</span><span className="sel">2</span><span className="given">3</span>
+        <span className="given">8</span><span></span><span className="given">1</span>
+      </div>
+    ),
+  },
+];
+
+const tools = ["TypeScript", "React", "Next.js", "Python", "Java", "PostgreSQL", "Kafka", "AWS", "Docker"];
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-paper text-ink">
-      <main className="mx-auto max-w-5xl border-l-4 border-double border-margin px-6 py-12 sm:ml-[max(1rem,calc(50%-32rem))] sm:px-12 sm:py-20">
-        <header className="flex flex-col-reverse gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h1 className="font-condensed text-5xl font-semibold tracking-tight underline decoration-double decoration-2 underline-offset-[0.2em] sm:text-7xl">
-              George Bemrose
-            </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed">
-              Founding engineer at Artifact AI, building AI bookkeeping for accountants. Before that I qualified as a
-              chartered accountant at EY and built full-stack software at CGI.
-            </p>
-            <p className="mt-4 text-muted">London</p>
-            <nav className="mt-6 flex gap-6 font-medium">
-              {contacts.map((c) => (
-                <a key={c.name} href={c.href} target="_blank" rel="noopener noreferrer" className="underline decoration-rule decoration-2 underline-offset-4 hover:decoration-margin">
-                  {c.name}
-                </a>
-              ))}
-            </nav>
+    <>
+      <header className="wrap top">
+        <a className="mark" href="#top" aria-label="George Bemrose, back to top">GB</a>
+        <nav aria-label="Sections">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+          <ThemeToggle />
+        </nav>
+      </header>
+
+      <main id="top">
+        <section className="wrap hero" aria-label="Introduction">
+          <div className="sheet">
+            <span className="scan" aria-hidden="true"></span>
+            <div className="copy">
+              <h1><Box field="name" i={0}>George Bemrose</Box></h1>
+              <p className="lede">
+                <Box field="role" i={1}><strong>Founding engineer</strong></Box> at{" "}
+                <Box field="employer" i={2}><strong>Artifact AI</strong></Box>, building the software accountants use to
+                check and sign off AI bookkeeping. Before that I was a{" "}
+                <Box field="qualification" i={3}><strong>chartered accountant</strong></Box>.
+              </p>
+            </div>
+            <div className="portrait">
+              <Box field="photo" i={4}>
+                <Image src="/Headshot.png" alt="George Bemrose" width={280} height={280} priority />
+              </Box>
+            </div>
           </div>
-          <Image src="/Headshot.png" alt="George Bemrose" width={180} height={180} priority className="h-28 w-28 sm:h-44 sm:w-44" />
-        </header>
+        </section>
 
-        <Ledger title="Experience" entries={workExperience} />
-        <Ledger title="Education" entries={education} />
+        <section className="wrap section" id="about" aria-labelledby="about-h">
+          <div className="about">
+            <div className="about-text">
+              <h2 id="about-h">About</h2>
+              <p>
+                I spent four years in audit at EY and qualified as a <strong>chartered accountant (ACA)</strong> before
+                moving into software. I now work at the point where accounting rules meet product design: the numbers
+                have to be exactly right, and the screen still has to feel calm.
+              </p>
+              <p>
+                Before Artifact I was a full-stack engineer at CGI, working across Java services, React front ends and
+                event streaming. I studied Physics at Bristol and came top in every computing module.
+              </p>
+              <ol className="path" aria-label="Career so far">
+                <li><time>2025</time><span>Founding Engineer, Artifact AI</span></li>
+                <li><time>2024</time><span>Software Engineer, CGI</span></li>
+                <li><time>2020</time><span>Assurance, EY (ACA qualified 2023)</span></li>
+                <li><time>2016</time><span>Physics BSc, University of Bristol</span></li>
+              </ol>
+            </div>
 
-        <section className="mt-16">
-          <h2 className="font-condensed text-2xl font-semibold">Side projects</h2>
-          <div className="mt-4 grid gap-10 border-t-2 border-ink pt-6 md:grid-cols-2">
-            {projects.map((p) => {
-              const external = !p.link.startsWith("/");
+            <div className="demo">
+              <fieldset>
+                <legend>Explain my job to…</legend>
+                <div className="seg">
+                  <input type="radio" name="explain" id="t-acc" defaultChecked /><label htmlFor="t-acc">An accountant</label>
+                  <input type="radio" name="explain" id="t-eng" /><label htmlFor="t-eng">An engineer</label>
+                  <input type="radio" name="explain" id="t-friend" /><label htmlFor="t-friend">A friend</label>
+                </div>
+              </fieldset>
+              <div className="panels" aria-live="polite">
+                <div className="panel p-acc"><p>The AI drafts journals from your bills, receipts and bank lines. I build the review side: how you check its work, approve it and post it to the client&apos;s ledger with the evidence attached.</p></div>
+                <div className="panel p-eng"><p>Document workflows, review queues and two-way integrations with accounting platforms, on a data layer where every figure has to reconcile. I own features from discovery calls with accountants through to production.</p></div>
+                <div className="panel p-friend"><p>Accountants spend hours typing receipts into software. We built AI that does the typing. I build the part where a person checks its homework.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="wrap section" id="work" aria-labelledby="work-h">
+          <div className="head">
+            <h2 id="work-h">Work</h2>
+            <p>Hover or tab to a card for details.</p>
+          </div>
+          <div className="grid">
+            {works.map((w) => {
+              const inner = (
+                <>
+                  <div className="visual" aria-hidden="true">{w.visual}</div>
+                  <div className="reveal">
+                    <p>{w.text}</p>
+                    <ul className="tags">{w.tags.map((t) => <li key={t}>{t}</li>)}</ul>
+                  </div>
+                  <div className="caption"><h3 id={w.id}>{w.title}</h3><span>{w.meta}</span></div>
+                </>
+              );
+              if (!w.href) return <article key={w.id} className="card" tabIndex={0} aria-labelledby={w.id}>{inner}</article>;
+              const external = w.href.startsWith("http");
               return (
-                <article key={p.title}>
-                  <Link
-                    href={p.link}
-                    {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-                    className="group block"
-                  >
-                    <Image src={p.imageUrl} alt={`${p.title} screenshot`} width={800} height={500} className="aspect-[16/10] w-full border border-rule object-cover object-top" />
-                    <h3 className="mt-4 font-condensed text-xl font-semibold underline decoration-rule decoration-2 underline-offset-4 group-hover:decoration-margin">
-                      {p.title}
-                    </h3>
-                  </Link>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{p.description}</p>
-                  <p className="mt-2 text-sm">{p.techStack.join(", ")}</p>
-                </article>
+                <a key={w.id} className="card" href={w.href} aria-labelledby={w.id}
+                  {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
+                  {inner}
+                </a>
               );
             })}
           </div>
         </section>
 
-        <section className="mt-16">
-          <h2 className="font-condensed text-2xl font-semibold">Tools I work with</h2>
-          <p className="mt-4 border-t-2 border-ink pt-4 leading-relaxed">{tools.join(", ")}</p>
+        <section className="tools" aria-labelledby="tools-h">
+          <div className="wrap">
+            <h2 id="tools-h">Tools I use</h2>
+            <ul>{tools.map((t) => <li key={t}>{t}</li>)}</ul>
+          </div>
         </section>
       </main>
-    </div>
+
+      <footer className="wrap" id="contact">
+        <div className="contact">
+          <h2>Building something for accountants? Let&apos;s talk.</h2>
+          <p>I&apos;m happy to hear about hard problems in finance software, or to compare notes on moving from audit into engineering.</p>
+          <div className="email">
+            <code>{EMAIL}</code>
+            <CopyEmail email={EMAIL} />
+          </div>
+          <div className="links">
+            <a href="https://www.linkedin.com/in/georgebemrose/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/GeorgeBemrose" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={`mailto:${EMAIL}`}>Email</a>
+          </div>
+        </div>
+        <p className="fine">George Bemrose, London.</p>
+      </footer>
+    </>
   );
 }
