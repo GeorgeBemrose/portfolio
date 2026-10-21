@@ -68,10 +68,10 @@ const works: { id: string; title: string; meta: string; href?: string; text: str
 const tools: [string, string[]][] = [
   ["Languages", ["TypeScript", "Python", "Java"]],
   ["Front end", ["React", "Next.js"]],
-  ["AI", ["LLMs (Claude)", "Vector databases"]],
+  ["AI", ["LLMs", "Vector databases"]],
   ["Data", ["PostgreSQL", "DynamoDB", "Redis", "Kafka", "Celery"]],
   ["Infrastructure", ["AWS", "Terraform", "Docker", "Datadog"]],
-  ["Integrations", ["Xero API", "QuickBooks API"]],
+  ["Integrations", ["Xero API", "QuickBooks API", "Rutter API"]],
 ];
 
 export default function Home() {
