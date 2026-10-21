@@ -88,9 +88,9 @@ export default function Home() {
               <h1>George Bemrose</h1>
               <p className="lede">
                 <strong style={{ "--i": 0 } as CSSProperties}>Founding engineer</strong> at{" "}
-                <strong style={{ "--i": 1 } as CSSProperties}>Artifact AI</strong>, building the software accountants use to
-                check and sign off AI bookkeeping. Before that I was a{" "}
-                <strong style={{ "--i": 2 } as CSSProperties}>chartered accountant</strong>.
+                <strong style={{ "--i": 1 } as CSSProperties}>Artifact AI</strong>, an a16z-backed AI startup for the
+                accounting industry. Accountant turned engineer: I qualified as a{" "}
+                <strong style={{ "--i": 2 } as CSSProperties}>chartered accountant</strong> at EY.
               </p>
             </div>
             <div className="portrait">
