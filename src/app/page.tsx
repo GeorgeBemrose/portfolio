@@ -5,15 +5,6 @@ import "./home.css";
 
 const EMAIL = "georgebemrose@gmail.com";
 
-// Extraction box drawn around a fact after the hero scan passes; i staggers the timing.
-function Box({ field, i, children }: { field: string; i: number; children: ReactNode }) {
-  return (
-    <span className="box" data-field={field} style={{ "--i": i } as CSSProperties}>
-      {children}
-    </span>
-  );
-}
-
 const works: { id: string; title: string; meta: string; href?: string; text: string; tags: string[]; visual: ReactNode }[] = [
   {
     id: "w1",
@@ -94,18 +85,16 @@ export default function Home() {
           <div className="sheet">
             <span className="scan" aria-hidden="true"></span>
             <div className="copy">
-              <h1><Box field="name" i={0}>George Bemrose</Box></h1>
+              <h1>George Bemrose</h1>
               <p className="lede">
-                <Box field="role" i={1}><strong>Founding engineer</strong></Box> at{" "}
-                <Box field="employer" i={2}><strong>Artifact AI</strong></Box>, building the software accountants use to
+                <strong style={{ "--i": 0 } as CSSProperties}>Founding engineer</strong> at{" "}
+                <strong style={{ "--i": 1 } as CSSProperties}>Artifact AI</strong>, building the software accountants use to
                 check and sign off AI bookkeeping. Before that I was a{" "}
-                <Box field="qualification" i={3}><strong>chartered accountant</strong></Box>.
+                <strong style={{ "--i": 2 } as CSSProperties}>chartered accountant</strong>.
               </p>
             </div>
             <div className="portrait">
-              <Box field="photo" i={4}>
-                <Image src="/Headshot.png" alt="George Bemrose" width={280} height={280} priority />
-              </Box>
+              <Image src="/Headshot.png" alt="George Bemrose" width={280} height={280} priority />
             </div>
           </div>
         </section>
