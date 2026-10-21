@@ -23,14 +23,7 @@
   --sweep: cubic-bezier(.65, 0, .35, 1);
   --radius: 14px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0D1118; --surface: #151B26; --tint: #1B2331; --ink: #E8ECF3; --muted: #9AA6BA;
-    --line: #273144; --accent: #8FA3FF; --on-accent: #0D1118;
-    --ok: #6FD3A0; --ok-bg: #12352A; --warn: #F3BE62; --warn-bg: #3A2B10;
-    color-scheme: dark;
-  }
-}
+/* Light by default; dark only via the toggle */
 :root[data-theme="dark"] {
   --bg: #0D1118; --surface: #151B26; --tint: #1B2331; --ink: #E8ECF3; --muted: #9AA6BA;
   --line: #273144; --accent: #8FA3FF; --on-accent: #0D1118;
@@ -96,30 +89,42 @@ h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 700; line-height: .95; let
 .lede strong { color: var(--ink); font-weight: 700; }
 
 /* extraction boxes: drawn after the scan passes */
-.box { position: relative; white-space: nowrap; }
+.box { position: relative; white-space: nowrap; margin-inline: .12em; }
+h1 .box, .portrait .box { margin-inline: 0; }
 .box::before, .box::after { animation: 0.45s var(--ease) calc(1.35s + var(--i, 0) * .14s) both; }
+/* viewfinder corners rather than a full outline */
 .box::before {
-  content: ""; position: absolute; inset: -.06em -.16em; border-radius: 4px; pointer-events: none;
-  border: 1.5px solid var(--accent);
-  background: color-mix(in oklab, var(--accent) 7%, transparent);
+  content: ""; position: absolute; inset: -.06em -.16em; pointer-events: none;
+  --c: color-mix(in oklab, var(--accent) 75%, transparent);
+  --k: .5em; --w: 1.5px;
+  background:
+    linear-gradient(var(--c) 0 0) top left / var(--k) var(--w),
+    linear-gradient(var(--c) 0 0) top left / var(--w) var(--k),
+    linear-gradient(var(--c) 0 0) top right / var(--k) var(--w),
+    linear-gradient(var(--c) 0 0) top right / var(--w) var(--k),
+    linear-gradient(var(--c) 0 0) bottom left / var(--k) var(--w),
+    linear-gradient(var(--c) 0 0) bottom left / var(--w) var(--k),
+    linear-gradient(var(--c) 0 0) bottom right / var(--k) var(--w),
+    linear-gradient(var(--c) 0 0) bottom right / var(--w) var(--k);
+  background-repeat: no-repeat;
   animation-name: box;
 }
 .box::after {
-  content: attr(data-field); position: absolute; left: -.16em; bottom: calc(100% + .06em);
+  content: attr(data-field); position: absolute; left: -.16em; bottom: calc(100% + .15em);
   font: 500 .6875rem/1 var(--mono); letter-spacing: .02em; white-space: nowrap;
-  color: var(--on-accent); background: var(--accent); padding: .3em .5em; border-radius: 4px 4px 0 0;
+  color: var(--accent);
   animation-name: tag;
 }
 h1 .box { display: inline-block; white-space: normal; }
-h1 .box::before { inset: .02em -.12em -.04em; }
-h1 .box::after { left: -.12em; bottom: calc(100% - .02em); font-size: .75rem; }
+h1 .box::before { inset: .04em -.1em -.02em; --k: .22em; --w: 2px; }
+h1 .box::after { left: -.1em; bottom: calc(100% + .1em); font-size: .75rem; }
 @keyframes box { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
 @keyframes tag { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 .portrait { width: clamp(7rem, 18vw, 13rem); }
 .portrait .box { display: block; }
-.portrait .box::before { inset: -.4rem; border-radius: 50%; }
-.portrait .box::after { left: 50%; bottom: auto; top: calc(100% + .6rem); transform: translateX(-50%); border-radius: 4px; animation-name: tag-c; }
+.portrait .box::before { inset: -.5rem; --k: 1.1rem; --w: 2px; }
+.portrait .box::after { left: 50%; bottom: auto; top: calc(100% + .9rem); transform: translateX(-50%); animation-name: tag-c; }
 @keyframes tag-c { from { opacity: 0; transform: translate(-50%, -4px); } to { opacity: 1; transform: translateX(-50%); } }
 .portrait img { display: block; width: 100%; height: auto; border-radius: 50%; }
 @media (max-width: 720px) {
