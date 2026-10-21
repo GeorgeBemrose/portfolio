@@ -89,7 +89,7 @@ export default function Home() {
               <p className="lede">
                 <strong style={{ "--i": 0 } as CSSProperties}>Founding engineer</strong> at{" "}
                 <strong style={{ "--i": 1 } as CSSProperties}>Artifact AI</strong>, an a16z-backed AI startup for the
-                accounting industry. Accountant turned engineer: I qualified as a{" "}
+                accounting industry. I started out as a{" "}
                 <strong style={{ "--i": 2 } as CSSProperties}>chartered accountant</strong> at EY.
               </p>
             </div>
