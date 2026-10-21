@@ -123,7 +123,7 @@ section { scroll-margin-top: 1rem; }
   background: var(--surface); border-radius: 999px; box-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 18%, transparent);
   transition: transform .4s var(--ease);
 }
-.seg:has(#t-eng:checked)::before { transform: translateX(100%); }
+.seg:has(#t-acc:checked)::before { transform: translateX(100%); }
 .seg:has(#t-friend:checked)::before { transform: translateX(200%); }
 .seg input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
 .seg label { position: relative; z-index: 1; text-align: center; padding: .5rem .25rem; border-radius: 999px; cursor: pointer; font-size: .92rem; color: var(--muted); transition: color .25s; }

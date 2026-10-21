@@ -124,15 +124,15 @@ export default function Home() {
               <fieldset>
                 <legend>Explain my job to…</legend>
                 <div className="seg">
-                  <input type="radio" name="explain" id="t-acc" defaultChecked /><label htmlFor="t-acc">An accountant</label>
-                  <input type="radio" name="explain" id="t-eng" /><label htmlFor="t-eng">An engineer</label>
+                  <input type="radio" name="explain" id="t-eng" defaultChecked /><label htmlFor="t-eng">An engineer</label>
+                  <input type="radio" name="explain" id="t-acc" /><label htmlFor="t-acc">An accountant</label>
                   <input type="radio" name="explain" id="t-friend" /><label htmlFor="t-friend">A friend</label>
                 </div>
               </fieldset>
               <div className="panels" aria-live="polite">
                 <div className="panel p-acc"><p>I design how you review and approve AI-generated work: document workflows, review queues and close sign-off. Our two-way integrations then turn it into accurate journals in your client&apos;s ledger.</p></div>
                 <div className="panel p-eng"><p>I build AI-powered bookkeeping features end to end, from problem discovery with accountants through design, build and production. I own two-way accounting platform integrations and architect the platform and data layer for reliable financial data at scale.</p></div>
-                <div className="panel p-friend"><p>Accountants spend hours typing receipts into software. We built AI that does the typing. I build the part where a person checks its homework.</p></div>
+                <div className="panel p-friend"><p>I build AI that takes the manual work off accountants. They go from doing the bookkeeping to reviewing it, which leaves more time to advise their clients.</p></div>
               </div>
             </div>
           </div>
