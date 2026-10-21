@@ -33,6 +33,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
   font: 400 1.0625rem/1.6 var(--body);
