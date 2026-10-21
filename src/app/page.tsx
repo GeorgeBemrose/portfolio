@@ -10,8 +10,8 @@ const works: { id: string; title: string; meta: string; href?: string; text: str
     id: "w1",
     title: "Artifact AI",
     meta: "Founding Engineer, 2025 to now",
-    text: "AI drafts the bookkeeping; I build how accountants review it, approve it and post it back to their ledger, plus the integrations and data layer underneath.",
-    tags: ["Review workflows", "Ledger integrations", "Data platform"],
+    text: "Founding engineer at an a16z-backed AI startup for the accounting industry. I build AI-powered bookkeeping features end to end, design how accountants review and approve AI-generated work, own two-way accounting platform integrations, and architect the platform and data layer.",
+    tags: ["Document workflows", "Review queues", "Close sign-off", "Integrations"],
     visual: (
       <div className="queue">
         <div><b>Bill: Northwind Paper</b><i>£412.80</i><span className="pill ok">Posted</span></div>
@@ -130,8 +130,8 @@ export default function Home() {
                 </div>
               </fieldset>
               <div className="panels" aria-live="polite">
-                <div className="panel p-acc"><p>The AI drafts journals from your bills, receipts and bank lines. I build the review side: how you check its work, approve it and post it to the client&apos;s ledger with the evidence attached.</p></div>
-                <div className="panel p-eng"><p>Document workflows, review queues and two-way integrations with accounting platforms, on a data layer where every figure has to reconcile. I own features from discovery calls with accountants through to production.</p></div>
+                <div className="panel p-acc"><p>I design how you review and approve AI-generated work: document workflows, review queues and close sign-off. Our two-way integrations then turn it into accurate journals in your client&apos;s ledger.</p></div>
+                <div className="panel p-eng"><p>I build AI-powered bookkeeping features end to end, from problem discovery with accountants through design, build and production. I own two-way accounting platform integrations and architect the platform and data layer for reliable financial data at scale.</p></div>
                 <div className="panel p-friend"><p>Accountants spend hours typing receipts into software. We built AI that does the typing. I build the part where a person checks its homework.</p></div>
               </div>
             </div>
