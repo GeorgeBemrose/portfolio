@@ -23,6 +23,7 @@ export default function Sudoku() {
   const [sel, setSel] = useState(PUZZLE.indexOf(0));
   const [paused, setPaused] = useState(false);
   const [secs, setSecs] = useState(0);
+  const [showSame, setShowSame] = useState(true);
 
   const bad = clashes(cells);
   const solved = cells.every(Boolean) && bad.size === 0;
@@ -93,7 +94,7 @@ export default function Sudoku() {
                   GIVEN[i] && "given",
                   i === sel && "sel",
                   isPeer(i, sel) && "peer",
-                  v && v === cells[sel] && i !== sel && "same",
+                  showSame && v && v === cells[sel] && i !== sel && "same",
                   bad.has(i) && "bad",
                   (c === 2 || c === 5) && "br",
                   (r === 2 || r === 5) && "bb",
@@ -124,9 +125,8 @@ export default function Sudoku() {
 
         <div className="pad">
           {Array.from({ length: 9 }, (_, k) => k + 1).map((v) => (
-            <button key={v} type="button" onClick={() => place(v)} disabled={!running || left(v) <= 0} aria-label={`Enter ${v}, ${left(v)} left`}>
-              <span>{v}</span>
-              <small>{left(v)} left</small>
+            <button key={v} type="button" onClick={() => place(v)} disabled={!running || left(v) <= 0} aria-label={`Enter ${v}`}>
+              {v}
             </button>
           ))}
           <button type="button" className="erase" onClick={() => place(0)} disabled={!running}>Erase</button>
@@ -136,6 +136,11 @@ export default function Sudoku() {
           {solved ? `Solved in ${fmt(secs)}. Nice work.` : "Pick a square, then a number. Arrow keys and 1 to 9 work too."}
         </p>
         <div className="actions">
+          <label className="switch">
+            <input type="checkbox" checked={showSame} onChange={(e) => setShowSame(e.target.checked)} />
+            <span className="track" aria-hidden="true"></span>
+            Highlight matching numbers
+          </label>
           <button className="ghost" type="button" onClick={restart}>{solved ? "Play again" : "Restart"}</button>
         </div>
       </main>
