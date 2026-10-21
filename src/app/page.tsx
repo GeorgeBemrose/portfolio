@@ -103,10 +103,10 @@ export default function Home() {
           <div className="about">
             <div className="about-text">
               <h2 id="about-h">About</h2>
+              <p className="belief">Accountants should spend their time reviewing and advising, not doing manual work.</p>
               <p>
-                I spent four years in audit at EY and qualified as a <strong>chartered accountant (ACA)</strong> before
-                moving into software. I now work at the point where accounting rules meet product design: the numbers
-                have to be exactly right, and the screen still has to feel calm.
+                <strong>Debits and credits by training (ACA, ex-EY), software engineer by trade.</strong> At Artifact AI, I
+                write the code that takes the manual work off accountants&apos; desks.
               </p>
               <p>
                 Before Artifact I was a full-stack engineer at CGI, working across Java services, React front ends and
