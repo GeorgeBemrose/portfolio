@@ -18,12 +18,20 @@ const clashes = (cells: number[]) =>
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 const MOVES: Record<string, number> = { ArrowUp: -9, ArrowDown: 9, ArrowLeft: -1, ArrowRight: 1 };
 
+const ASSISTS = {
+  lines: "Shade row, column and box",
+  same: "Highlight matching numbers",
+  clash: "Show duplicates",
+  done: "Grey out finished numbers",
+};
+type Assist = keyof typeof ASSISTS;
+
 export default function Sudoku() {
   const [cells, setCells] = useState(PUZZLE);
   const [sel, setSel] = useState(PUZZLE.indexOf(0));
   const [paused, setPaused] = useState(false);
   const [secs, setSecs] = useState(0);
-  const [showSame, setShowSame] = useState(true);
+  const [assist, setAssist] = useState<Record<Assist, boolean>>({ lines: true, same: true, clash: true, done: true });
 
   const bad = clashes(cells);
   const solved = cells.every(Boolean) && bad.size === 0;
@@ -93,9 +101,9 @@ export default function Sudoku() {
                   "cell",
                   GIVEN[i] && "given",
                   i === sel && "sel",
-                  isPeer(i, sel) && "peer",
-                  showSame && v && v === cells[sel] && i !== sel && "same",
-                  bad.has(i) && "bad",
+                  assist.lines && isPeer(i, sel) && "peer",
+                  assist.same && v && v === cells[sel] && i !== sel && "same",
+                  assist.clash && bad.has(i) && "bad",
                   (c === 2 || c === 5) && "br",
                   (r === 2 || r === 5) && "bb",
                 ].filter(Boolean).join(" ");
@@ -125,7 +133,7 @@ export default function Sudoku() {
 
         <div className="pad">
           {Array.from({ length: 9 }, (_, k) => k + 1).map((v) => (
-            <button key={v} type="button" onClick={() => place(v)} disabled={!running || left(v) <= 0} aria-label={`Enter ${v}`}>
+            <button key={v} type="button" onClick={() => place(v)} disabled={!running || (assist.done && left(v) <= 0)} aria-label={`Enter ${v}`}>
               {v}
             </button>
           ))}
@@ -135,12 +143,17 @@ export default function Sudoku() {
         <p className={`status${solved ? " won" : ""}`} aria-live="polite">
           {solved ? `Solved in ${fmt(secs)}. Nice work.` : "Pick a square, then a number. Arrow keys and 1 to 9 work too."}
         </p>
+        <fieldset className="assists">
+          <legend>Assists</legend>
+          {(Object.keys(ASSISTS) as Assist[]).map((k) => (
+            <label className="switch" key={k}>
+              <input type="checkbox" checked={assist[k]} onChange={(e) => setAssist((a) => ({ ...a, [k]: e.target.checked }))} />
+              <span className="track" aria-hidden="true"></span>
+              {ASSISTS[k]}
+            </label>
+          ))}
+        </fieldset>
         <div className="actions">
-          <label className="switch">
-            <input type="checkbox" checked={showSame} onChange={(e) => setShowSame(e.target.checked)} />
-            <span className="track" aria-hidden="true"></span>
-            Highlight matching numbers
-          </label>
           <button className="ghost" type="button" onClick={restart}>{solved ? "Play again" : "Restart"}</button>
         </div>
       </main>
