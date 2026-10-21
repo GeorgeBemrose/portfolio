@@ -1,11 +1,19 @@
 [
   {
-    "start": "April 2024",
+    "start": "Oct 2025",
     "end": "Present",
+    "organization": "Artifact AI",
+    "role": "Founding Engineer",
+    "description": "a16z-backed AI startup for the accounting industry. Building AI-powered bookkeeping features end to end, accountant review & approval workflows, and two-way accounting platform integrations.",
+    "location": "London, United Kingdom",
+    "type": "work"
+  },
+  {
+    "start": "Aug 2025",
+    "end": "Oct 2025",
     "organization": "CGI",
-    "logo":"/logo_cgi_color.png",
-    "role": "Full Stack Software Engineer",
-    "description": "Java, Typescript, React, JavaScript, Docker, Kafka, PostgreSQL, AWS, Elasticsearch, WebSockets, & RESTful API",
+    "role": "Software Engineer",
+    "description": "Full-stack work on Java and TypeScript/React services: Kafka, PostgreSQL, Elasticsearch, WebSockets and REST APIs on AWS, shipped with Docker.",
     "location": "City Of London, England, United Kingdom",
     "skills": [
       "Amazon Web Services (AWS)",
@@ -19,8 +27,25 @@
     "type": "work"
   },
   {
-    "start": "October 2023",
-    "end": "April 2024",
+    "start": "Apr 2024",
+    "end": "Aug 2025",
+    "organization": "CGI",
+    "role": "Junior Software Engineer",
+    "location": "City Of London, England, United Kingdom",
+    "skills": [
+      "Amazon Web Services (AWS)",
+      "Web Development",
+      "JavaScript",
+      "Cloud Computing",
+      "Computer Science",
+      "React",
+      "TypeScript"
+    ],
+    "type": "work"
+  },
+  {
+    "start": "Oct 2023",
+    "end": "Apr 2024",
     "organization": "EY (Ernst & Young)",
     "role": "Assurance Senior",
     "location": "London, England, United Kingdom",
@@ -36,10 +61,10 @@
     "type": "work"
   },
   {
-    "start": "October 2022",
-    "end": "October 2023",
+    "start": "Oct 2022",
+    "end": "Oct 2023",
     "organization": "EY (Ernst & Young)",
-    "role": "PQ Assurance Senior",
+    "role": "Part-Qualified Assurance Senior",
     "location": "London, England, United Kingdom",
     "skills": [
       "Analytics",
@@ -52,8 +77,8 @@
     "type": "work"
   },
   {
-    "start": "September 2020",
-    "end": "October 2022",
+    "start": "Sep 2020",
+    "end": "Oct 2022",
     "organization": "EY (Ernst & Young)",
     "role": "Assurance Associate",
     "location": "Southampton, England, United Kingdom",
@@ -68,8 +93,8 @@
     "type": "work"
   },
   {
-    "start": "2019",
-    "end": "2020",
+    "start": "Jun 2019",
+    "end": "Jun 2020",
     "organization": "University of Bristol Students' Union",
     "role": "Sabbatical Officer & Vice Chair of the Trustee Board",
     "skills": [

@@ -4,15 +4,15 @@
     "end": "2023",
     "organization": "ICAEW",
     "role": "ACA",
-    "description": "Chartered Accountant - First time passes",
+    "description": "Chartered accountant, first-time passes",
     "type": "education"
   },
   {
     "start": "2016",
     "end": "2019",
     "organization": "University of Bristol",
-    "role": "Physics Bsc - 2.1",
-    "description": "1st in all Computing Modules and Final Year Research Project",
+    "role": "Physics BSc, 2:1",
+    "description": "First in all computing modules and the final-year research project",
     "type": "education"
   },
   {
@@ -20,7 +20,7 @@
     "end": "2016",
     "organization": "Suffolk One",
     "role": "A-Levels",
-    "description": "Computing, Physics, Maths - AAB, A* in Computing Coursework",
+    "description": "Computing, Physics, Maths (AAB), A* in Computing coursework",
     "type": "education"
   }
 ]

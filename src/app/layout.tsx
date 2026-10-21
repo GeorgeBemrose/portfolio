@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
-import Head from "next/head";
-import localFont from "next/font/local";
+import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-sans",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const plexCondensed = IBM_Plex_Sans_Condensed({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-plex-condensed",
 });
 
 export const metadata: Metadata = {
   title: "George Bemrose",
-  description: "Development Portfolio of George Bemrose",
+  description: "Founding engineer at Artifact AI. Chartered accountant turned software engineer.",
 };
 
 export default function RootLayout({
@@ -26,12 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${plexSans.variable} ${plexCondensed.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
