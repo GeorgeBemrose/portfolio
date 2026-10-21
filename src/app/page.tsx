@@ -1,9 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
-import { ThemeToggle, CopyEmail } from "./components/HomeControls";
+import { ThemeToggle } from "./components/HomeControls";
 import "./home.css";
-
-const EMAIL = "georgebemrose@gmail.com";
 
 const works: { id: string; title: string; meta: string; href?: string; text: string; tags: string[]; visual: ReactNode }[] = [
   {
@@ -193,14 +191,9 @@ export default function Home() {
         <div className="contact">
           <h2>Building something for accountants? Let&apos;s talk.</h2>
           <p>I&apos;m happy to hear about hard problems in finance software, or to compare notes on moving from audit into engineering.</p>
-          <div className="email">
-            <code>{EMAIL}</code>
-            <CopyEmail email={EMAIL} />
-          </div>
           <div className="links">
-            <a href="https://www.linkedin.com/in/georgebemrose/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a className="btn" href="https://www.linkedin.com/in/georgebemrose/" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
             <a href="https://github.com/GeorgeBemrose" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href={`mailto:${EMAIL}`}>Email</a>
           </div>
         </div>
         <p className="fine">George Bemrose, London.</p>
