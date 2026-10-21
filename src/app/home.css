@@ -150,7 +150,7 @@ section { scroll-margin-top: 1rem; }
 .visual > * { transition: transform .6s var(--ease), filter .6s var(--ease); }
 .card:hover .visual > *, .card:focus-visible .visual > * { transform: scale(.94) translateY(-6%); filter: blur(2px); }
 .reveal {
-  grid-area: 1 / 1; align-self: end; display: grid; gap: .75rem; padding: 1.25rem 1.25rem 1.1rem;
+  grid-area: 1 / 1; align-self: end; position: relative; z-index: 1; display: grid; gap: .75rem; padding: 1.25rem 1.25rem 1.1rem;
   background: color-mix(in oklab, var(--surface) 90%, transparent);
   border-top: 1px solid var(--line);
   transform: translateY(101%); transition: transform .5s var(--ease);
